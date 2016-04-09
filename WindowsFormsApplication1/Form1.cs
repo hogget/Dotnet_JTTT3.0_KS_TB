@@ -1,29 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Net.Mail;
-using HtmlAgilityPack;
-using System.Net;
-using System.Web;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
 
 namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
-        BindingList<Task> listaTaskow;
+        public BindingList<MyTask> ListaTaskow;
         public Form1()
         {
             InitializeComponent();
-            listaTaskow = new BindingList<Task>();
+            ListaTaskow = new BindingList<MyTask>();
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -31,78 +18,25 @@ namespace WindowsFormsApplication1
 
         }
 
-        public string GetPageHtml(String _url)
-        {
-            using (var wc = new WebClient())
-            {
-                // Ustawiamy prawidłowe kodowanie dla tej strony
-                wc.Encoding = Encoding.UTF8;
-                // Dekodujemy HTML do czytelnych dla wszystkich znaków 
-                var html = System.Net.WebUtility.HtmlDecode(wc.DownloadString(_url));
-                return html;
-            }
-        }
-
-        private void Pobierz_obrazek(String nazwa_strony)
-        {
-
-        }
-
-        private void Send_email(String email, String tresc)
-        {
-
-            MailMessage mail = new MailMessage("aga.michalik788@gmail.com", email);
-            mail.Subject = "Powiadomienie";
-            mail.Body = tresc;
-
-            SmtpClient client = new SmtpClient();
-            client.Host = "smtp.gmail.com";
-            client.Port = 587;
-            client.UseDefaultCredentials = false; // domyslnie false 
-            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-            client.EnableSsl = true;
-            client.Credentials = new NetworkCredential("aga.michalik788@gmail.com", "javaandfriends");
-               //try - catch
-            try
-            {
-                client.Send(mail);
-                MessageBox.Show("Wysłano maila");
-            }
-            catch (Exception ex)
-            {
-               // Console.WriteLine("Exception caught", ex.ToString());
-                string a = ex.ToString();
-                MessageBox.Show(a);
-            }
-        }
-
         private void start_Click(object sender, EventArgs e)
         {
-            String adres = Adres_strony.Text;
-            String email = Email.Text;
-            String klucz = Klucz.Text;
-            Task task = new Task(adres, klucz, email);
-            listaTaskow.Add(task);
+            var myTask = new MyTask();
+            myTask.AdresStrony = Adres_strony.Text;
+            myTask.Klucz = Klucz.Text;
+            myTask.Email = Email.Text;
+            myTask.Name = nazwaBox.Text;
 
-            lista_zadan.DataSource = listaTaskow;
-        }
+            using (var context = new JtttContext())
+            {
+                context.MyTasks.Add(myTask);
+                context.SaveChanges();
+            }
 
-        private void Adres_strony_TextChanged(object sender, EventArgs e)
-        {
-
+            ListaTaskow.Add(myTask);
+            lista_zadan.DataSource = ListaTaskow;
         }
 
         private void email_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
         {
 
         }
@@ -117,60 +51,69 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void wykonajPojedynczegoTaska(Task taskDoWykonania)
+        private void wykonajPojedynczegoTaska(MyTask TaskDoWykonania)
         {
+            Html html = new Html();
+            var images = html.GetImagesFromPageWithKey(TaskDoWykonania.AdresStrony, TaskDoWykonania.Klucz);
+            EMail emailHelper = new EMail("aga.michalik788@gmail.com", "javaandfriends");
 
-           var doc = new HtmlAgilityPack.HtmlDocument();
-           var pageHtml = GetPageHtml(taskDoWykonania.Adres_strony);
-           doc.LoadHtml(pageHtml);
-           var nodes = doc.DocumentNode.Descendants("img");
-
-           foreach (var node in nodes)
-             {
-                var Value1 = node.GetAttributeValue("alt", "");
-                bool znalezionoObrazekZSzukanymKluczem = Value1.Substring(0, Value1.Length).Contains(taskDoWykonania.Klucz);
-
-                if (znalezionoObrazekZSzukanymKluczem)
-                    Klucz.Text = node.GetAttributeValue("src", "");
-                   Send_email(taskDoWykonania.Email, node.GetAttributeValue("src", ""));
-             }
+            foreach (var imageUrl in images)
+                emailHelper.SendMail(TaskDoWykonania.Email, "This should be funny!!!", imageUrl);
         }
 
-        private void wykonajZadaniaZListy(object sender, EventArgs e)
+        private void WykonajZadaniaZListy(object sender, EventArgs e)
         {
-         foreach (var task in listaTaskow)
-         {
-             wykonajPojedynczegoTaska(task);
-         }
+            foreach (var task in ListaTaskow)
+            {
+                wykonajPojedynczegoTaska(task);
+            }
         }
 
-        private void wyczyscListe(object sender, EventArgs e)
+        private void WyczyscListe(object sender, EventArgs e)
         {
-            listaTaskow.Clear();
+            ListaTaskow.Clear();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void Serialize(object sender, EventArgs e)
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream fileStream = new FileStream("Dane.dat", FileMode.Create);
-
-            try
-            {
-                formatter.Serialize(fileStream, listaTaskow);
-            }
-            catch (Exception exception) {}
+            Serializer serializer = new Serializer();
+            serializer.Serialize(ListaTaskow, "Dane.dat");
         }
 
         private void Deserialize(object sender, EventArgs e)
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream fileStream = new FileStream("Dane.dat", FileMode.Open);
+            Serializer deserializer = new Serializer();
+            ListaTaskow = deserializer.Deserialize("Dane.dat");
+        }
 
-            try
-            {
-                listaTaskow = (BindingList<Task>)formatter.Deserialize(fileStream);
-            }
-            catch (Exception exception) {}
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nazwaBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Adres_strony_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
