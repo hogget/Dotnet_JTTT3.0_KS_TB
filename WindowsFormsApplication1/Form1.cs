@@ -46,6 +46,7 @@ namespace WindowsFormsApplication1
             else
             {
                 var wykonaj = new ObrazkiZeStrony(Adres_strony.Text, Klucz.Text);
+                myTask.Wykonaj = wykonaj;
             }
 
             using (var context = new JtttContext())
