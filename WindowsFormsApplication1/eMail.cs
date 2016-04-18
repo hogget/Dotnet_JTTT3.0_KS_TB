@@ -5,10 +5,13 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
 {
-    class EMail
+    class EMail : IWyswietl
     {
         private string _usrEmail;
         private string _usrPass;
+        private string eMail;
+        private string topic;
+        private string contents;
 
         public EMail(string email, string pass)
         {
@@ -16,7 +19,14 @@ namespace WindowsFormsApplication1
             _usrPass = pass;
         }
 
-        public void SendMail(string eMail, string topic, string contents)
+        public void InsertData(string _eMail, string _topic, string _contents)
+        {
+            eMail = _eMail;
+            topic = _topic;
+            contents = _contents;
+        }
+
+        public override void Wyswietl()
         {
             MailMessage mail = new MailMessage(_usrEmail, eMail);
             mail.Subject = topic;

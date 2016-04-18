@@ -44,11 +44,19 @@ namespace WindowsFormsApplication1
             this.lista_zadan = new System.Windows.Forms.ListBox();
             this.nazwaBox = new System.Windows.Forms.TextBox();
             this.Nazwa = new System.Windows.Forms.Label();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.Temperatura = new System.Windows.Forms.Label();
+            this.tempBox = new System.Windows.Forms.TextBox();
+            this.tabControl1.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // Klucz
             // 
-            this.Klucz.Location = new System.Drawing.Point(78, 122);
+            this.Klucz.Location = new System.Drawing.Point(179, 209);
             this.Klucz.Name = "Klucz";
             this.Klucz.Size = new System.Drawing.Size(118, 20);
             this.Klucz.TabIndex = 1;
@@ -66,7 +74,7 @@ namespace WindowsFormsApplication1
             // 
             // Email
             // 
-            this.Email.Location = new System.Drawing.Point(78, 37);
+            this.Email.Location = new System.Drawing.Point(9, 19);
             this.Email.Name = "Email";
             this.Email.Size = new System.Drawing.Size(118, 20);
             this.Email.TabIndex = 3;
@@ -75,7 +83,7 @@ namespace WindowsFormsApplication1
             // button1
             // 
             this.button1.AutoEllipsis = true;
-            this.button1.Location = new System.Drawing.Point(29, 202);
+            this.button1.Location = new System.Drawing.Point(33, 272);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(89, 30);
             this.button1.TabIndex = 4;
@@ -117,7 +125,7 @@ namespace WindowsFormsApplication1
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(75, 21);
+            this.label1.Location = new System.Drawing.Point(6, 3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(64, 13);
             this.label1.TabIndex = 9;
@@ -127,16 +135,16 @@ namespace WindowsFormsApplication1
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(75, 106);
+            this.label2.Location = new System.Drawing.Point(176, 193);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(33, 13);
+            this.label2.Size = new System.Drawing.Size(69, 13);
             this.label2.TabIndex = 10;
-            this.label2.Text = "Klucz";
+            this.label2.Text = "Klucz/Miasto";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(76, 67);
+            this.label3.Location = new System.Drawing.Point(6, 42);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(32, 13);
             this.label3.TabIndex = 11;
@@ -145,7 +153,7 @@ namespace WindowsFormsApplication1
             // 
             // Adres_strony
             // 
-            this.Adres_strony.Location = new System.Drawing.Point(78, 83);
+            this.Adres_strony.Location = new System.Drawing.Point(9, 58);
             this.Adres_strony.Name = "Adres_strony";
             this.Adres_strony.Size = new System.Drawing.Size(118, 20);
             this.Adres_strony.TabIndex = 12;
@@ -162,7 +170,7 @@ namespace WindowsFormsApplication1
             // 
             // nazwaBox
             // 
-            this.nazwaBox.Location = new System.Drawing.Point(78, 168);
+            this.nazwaBox.Location = new System.Drawing.Point(46, 209);
             this.nazwaBox.Name = "nazwaBox";
             this.nazwaBox.Size = new System.Drawing.Size(117, 20);
             this.nazwaBox.TabIndex = 14;
@@ -170,34 +178,88 @@ namespace WindowsFormsApplication1
             // Nazwa
             // 
             this.Nazwa.AutoSize = true;
-            this.Nazwa.Location = new System.Drawing.Point(78, 149);
+            this.Nazwa.Location = new System.Drawing.Point(43, 193);
             this.Nazwa.Name = "Nazwa";
             this.Nazwa.Size = new System.Drawing.Size(40, 13);
             this.Nazwa.TabIndex = 15;
             this.Nazwa.Text = "Nazwa";
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(33, 18);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(144, 140);
+            this.tabControl1.TabIndex = 16;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.label1);
+            this.tabPage1.Controls.Add(this.Email);
+            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.Adres_strony);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(136, 114);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.Temperatura);
+            this.tabPage2.Controls.Add(this.tempBox);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(136, 114);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // Temperatura
+            // 
+            this.Temperatura.AutoSize = true;
+            this.Temperatura.Location = new System.Drawing.Point(9, 3);
+            this.Temperatura.Name = "Temperatura";
+            this.Temperatura.Size = new System.Drawing.Size(67, 13);
+            this.Temperatura.TabIndex = 17;
+            this.Temperatura.Text = "Temperatura";
+            // 
+            // tempBox
+            // 
+            this.tempBox.Location = new System.Drawing.Point(9, 19);
+            this.tempBox.Name = "tempBox";
+            this.tempBox.Size = new System.Drawing.Size(117, 20);
+            this.tempBox.TabIndex = 17;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(641, 244);
+            this.ClientSize = new System.Drawing.Size(894, 485);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.Nazwa);
             this.Controls.Add(this.nazwaBox);
             this.Controls.Add(this.lista_zadan);
-            this.Controls.Add(this.Adres_strony);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.button4);
+            this.Controls.Add(this.Klucz);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.Email);
             this.Controls.Add(this.start);
-            this.Controls.Add(this.Klucz);
             this.Name = "Form1";
             this.Text = "JTTT 3.0";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -219,6 +281,11 @@ namespace WindowsFormsApplication1
         private System.Windows.Forms.ListBox lista_zadan;
         private System.Windows.Forms.TextBox nazwaBox;
         private System.Windows.Forms.Label Nazwa;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Label Temperatura;
+        private System.Windows.Forms.TextBox tempBox;
     }
 }
 

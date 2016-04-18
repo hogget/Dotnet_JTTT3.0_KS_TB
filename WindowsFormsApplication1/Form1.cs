@@ -91,27 +91,12 @@ namespace WindowsFormsApplication1
             ListaTaskow = deserializer.Deserialize("Dane.dat");
         }
 
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void nazwaBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void Adres_strony_TextChanged(object sender, EventArgs e)
         {
 
         }
 
         private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click_1(object sender, EventArgs e)
         {
 
         }

@@ -55,3 +55,6 @@ C:\Users\Klaudynka\Documents\Visual Studio 2015\Projects\Dotnet_JTTT3.0_KS_TB\Wi
 C:\Users\Klaudynka\Documents\Visual Studio 2015\Projects\Dotnet_JTTT3.0_KS_TB\WindowsFormsApplication1\bin\Debug\HtmlAgilityPack.xml
 C:\Users\Klaudynka\Documents\Visual Studio 2015\Projects\Dotnet_JTTT3.0_KS_TB\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 C:\Users\Klaudynka\Documents\Visual Studio 2015\Projects\Dotnet_JTTT3.0_KS_TB\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+C:\Users\dzbik\Documents\docik\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+C:\Users\dzbik\Documents\docik\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+C:\Users\dzbik\Documents\docik\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
