@@ -6,11 +6,11 @@ namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
-        public BindingList<MyTask> ListaTaskow;
+        public BindingList<NewTask> ListaTaskow;
         public Form1()
         {
             InitializeComponent();
-            ListaTaskow = new BindingList<MyTask>();
+            ListaTaskow = new BindingList<NewTask>();
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -20,15 +20,37 @@ namespace WindowsFormsApplication1
 
         private void start_Click(object sender, EventArgs e)
         {
-            var myTask = new MyTask();
-            myTask.AdresStrony = Adres_strony.Text;
-            myTask.Klucz = Klucz.Text;
-            myTask.Email = Email.Text;
+            var myTask = new NewTask();
             myTask.Name = nazwaBox.Text;
+
+            bool wykonujeWysylanieEmailem = wyslij_email.Checked;
+            bool wykonujemySprawdzeniePogody = tempBox.Text.Length == 0;
+
+            if (wykonujeWysylanieEmailem)
+            {
+                var wyswietl = new EMail("aga.michalik788@gmail.com", "javaandfriends");
+                wyswietl.InsertData(Email.Text, "To powinno Cie zainteresowac !!!");
+                myTask.Wyswietl = wyswietl;
+            }  
+            else
+            {
+                var wyswietl = new Messagebox();
+                myTask.Wyswietl = wyswietl;
+            }
+
+            if(wykonujemySprawdzeniePogody)
+            {
+                var wykonaj = new Weather(Klucz.Text, Convert.ToDouble(tempBox.Text));
+                myTask.Wykonaj = wykonaj;
+            }
+            else
+            {
+                var wykonaj = new ObrazkiZeStrony(Adres_strony.Text, Klucz.Text);
+            }
 
             using (var context = new JtttContext())
             {
-                context.MyTasks.Add(myTask);
+               // context.MyTasks.Add(myTask);
                 context.SaveChanges();
             }
 
@@ -51,14 +73,9 @@ namespace WindowsFormsApplication1
 
         }
 
-        private void wykonajPojedynczegoTaska(MyTask TaskDoWykonania)
+        private void wykonajPojedynczegoTaska(NewTask TaskDoWykonania)
         {
-            Html html = new Html();
-            var images = html.GetImagesFromPageWithKey(TaskDoWykonania.AdresStrony, TaskDoWykonania.Klucz);
-            EMail emailHelper = new EMail("aga.michalik788@gmail.com", "javaandfriends");
-
-            foreach (var imageUrl in images)
-                emailHelper.SendMail(TaskDoWykonania.Email, "This should be funny!!!", imageUrl);
+            TaskDoWykonania.WykonajZadanie();
         }
 
         private void WykonajZadaniaZListy(object sender, EventArgs e)
@@ -97,6 +114,16 @@ namespace WindowsFormsApplication1
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tempBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void nazwaBox_TextChanged(object sender, EventArgs e)
         {
 
         }

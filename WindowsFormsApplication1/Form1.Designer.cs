@@ -49,6 +49,7 @@ namespace WindowsFormsApplication1
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.Temperatura = new System.Windows.Forms.Label();
             this.tempBox = new System.Windows.Forms.TextBox();
+            this.wyslij_email = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -174,6 +175,7 @@ namespace WindowsFormsApplication1
             this.nazwaBox.Name = "nazwaBox";
             this.nazwaBox.Size = new System.Drawing.Size(117, 20);
             this.nazwaBox.TabIndex = 14;
+            this.nazwaBox.TextChanged += new System.EventHandler(this.nazwaBox_TextChanged);
             // 
             // Nazwa
             // 
@@ -235,12 +237,24 @@ namespace WindowsFormsApplication1
             this.tempBox.Name = "tempBox";
             this.tempBox.Size = new System.Drawing.Size(117, 20);
             this.tempBox.TabIndex = 17;
+            this.tempBox.TextChanged += new System.EventHandler(this.tempBox_TextChanged);
+            // 
+            // wyslij_email
+            // 
+            this.wyslij_email.AutoSize = true;
+            this.wyslij_email.Location = new System.Drawing.Point(46, 168);
+            this.wyslij_email.Name = "wyslij_email";
+            this.wyslij_email.Size = new System.Drawing.Size(81, 17);
+            this.wyslij_email.TabIndex = 17;
+            this.wyslij_email.Text = "Wyslij Email";
+            this.wyslij_email.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(894, 485);
+            this.Controls.Add(this.wyslij_email);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.Nazwa);
             this.Controls.Add(this.nazwaBox);
@@ -286,6 +300,7 @@ namespace WindowsFormsApplication1
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Label Temperatura;
         private System.Windows.Forms.TextBox tempBox;
+        private System.Windows.Forms.CheckBox wyslij_email;
     }
 }
 

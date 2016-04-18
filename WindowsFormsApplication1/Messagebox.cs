@@ -6,13 +6,9 @@ namespace WindowsFormsApplication1
     [Serializable]
     public class Messagebox : IWyswietl
     {
-        public string wiadomosc { get; set; }
-        public Messagebox(string wiad)
-        {
-            wiadomosc = wiad;
-        }
+        public Messagebox() { }
 
-        public override void Wyswietl()
+        public override void Wyswietl(string wiadomosc)
         {
             MessageBox.Show(wiadomosc);
         }

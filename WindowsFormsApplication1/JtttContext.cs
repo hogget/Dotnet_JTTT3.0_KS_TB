@@ -9,6 +9,6 @@ namespace WindowsFormsApplication1
 {
     class JtttContext : DbContext
     {
-        public DbSet<MyTask> MyTasks { get; set; }
+        public DbSet<NewTask> MyTasks { get; set; }
     }
 }

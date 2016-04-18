@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Collections.Generic;
 
 namespace WindowsFormsApplication1
 {
@@ -14,11 +15,9 @@ namespace WindowsFormsApplication1
             _key = key;
         }
 
-        public override string Wykonaj()
+        public override List<string> Wykonaj()
         {
-            var list = html.GetImagesFromPageWithKey(_url, _key);
-            return list[0];
+            return html.GetImagesFromPageWithKey(_url, _key);
         }
-
     }
 }
